@@ -9,7 +9,6 @@ var App = {
 
     FormView.initialize();
     RoomsView.initialize();
-    debugger;
     MessagesView.initialize();
 
     // Fetch initial batch of messages

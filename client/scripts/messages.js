@@ -1,9 +1,9 @@
 var Messages = {
   //create a fetch method
   fetch: function() {
-    Parse.readAll((callback) => {
-      console.log('success');
-      return data;
+    Parse.readAll((data) => {
+      // call MessageView.render on the data
+      MessagesView.render(data);
     });
   }
 
