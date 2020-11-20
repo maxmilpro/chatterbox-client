@@ -17,7 +17,7 @@ var FormView = {
       // access text from DOM and store as a property of the message object
       text: FormView.$message.val(),
       // access roomname from DOM store as a properrty of the message object
-      roomname: 'lobby'
+      roomname: RoomsView.$select.val()
     };
     // add the message to the server by calling Messages.set with the object as an argument
     Messages.set(message);

@@ -2,29 +2,30 @@ var RoomsView = {
 
   $button: $('#rooms button'),
   $select: $('#rooms select'),
+  $addRoom: $('#add-room'),
 
   initialize: function() {
     //access the messages in the database
     Rooms.fetch();
+    RoomsView.$select.on('change', RoomsView.handleRoomSelect);
+    RoomsView.$button.on('click', RoomsView.handleAddRoom);
   },
 
-  render: function(data) {
-    // create a containerArr = rooms
-    var roomList = [];
-    // iterate over the data
-    for (room of data.results) {
-      // if the current room is not already in the rooms array
-      if (room.roomname && !_.contains(roomList, room.roomname)) {
-        // add the room to the rooms array
-        roomList.push(room.roomname);
-      }
-    }
+  render: function() {
+    RoomsView.$select.empty();
     // iterate over the rooms array
-    for (room of roomList) {
-      var compiled = _.template('<option> <%- roomName %>  </option>');
-      // add each to the room select
+    for (room of Rooms.list) {
+      var compiled = _.template(`<option value='<%- roomName %>'> <%-roomName%>  </option>`);
       RoomsView.$select.append(compiled({'roomName': room}));
     }
-  }
+  },
 
+  handleRoomSelect: function () {
+    console.log('new room selected');
+    Messages.fetch();
+  },
+
+  handleAddRoom: function() {
+    Rooms.addRoom();
+  }
 };

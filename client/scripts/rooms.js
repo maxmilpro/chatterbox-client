@@ -3,9 +3,22 @@ var Rooms = {
   fetch: function() {
     Parse.readAll((data) => {
       // call MessageView.render on the data
-      console.log('chatterbox: Rooms retrieved'),
-      RoomsView.render(data);
+      console.log('chatterbox: Rooms retrieved');
+      for (message of data.results) {
+        if (message.roomname && !_.contains(Rooms.list, message.roomname)) {
+          Rooms.list.push(message.roomname);
+        }
+      }
+      RoomsView.render();
     });
-  }
+  },
+
+  addRoom: function() {
+    Rooms.list.push(RoomsView.$addRoom.val());
+    RoomsView.render();
+  },
+
+  list: []
 
 };
+

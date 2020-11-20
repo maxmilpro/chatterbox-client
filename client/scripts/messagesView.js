@@ -16,10 +16,14 @@ var MessagesView = {
       if (data.results[i]['username'] === undefined || data.results[i]['text'] === undefined) {
         continue;
       }
-      //create a complier function with the MessageView.render
-      var compiled = MessageView.render(data.results[i]);
-      //create a variable equal to the return value of invoke MessageView render method
-      html += compiled;
+      // capture the currently selected roomname
+      //if the messages roomname is === to the currently selected roomname
+      if (data.results[i].roomname === RoomsView.$select.val()) {
+        //create a complier function with the MessageView.render
+        var compiled = MessageView.render(data.results[i]);
+        //create a variable equal to the return value of invoke MessageView render method
+        html += compiled;
+      }
       //append rendered message to the chats element
     }
     MessagesView.$chats.empty();
