@@ -1,22 +1,19 @@
 var MessagesView = {
 
   $chats: $('#chats'),
+  $refresh: $('.refresh'),
 
   initialize: function() {
-    //access the messages' data by invoking Messages.fetch()
-    var messageData = Messages.fetch();
-    // console.log('messageData: ' + messageData);
-    // //invoke the render(data)
-    // MessagesView.render(messageData);
+    Messages.fetch();
+    MessagesView.$refresh.on('click', MessagesView.handleRefresh);
   },
 
   render: function(data) {
-    //parameter(data)
-    //iterate over the data
     var html = "";
+    //iterate over the data
     for (var i = 0; i < data.results.length; i++) {
       // if there is a username
-      if (data.results[i]['username'] === undefined) {
+      if (data.results[i]['username'] === undefined || data.results[i]['text'] === undefined) {
         continue;
       }
       //create a complier function with the MessageView.render
@@ -25,7 +22,12 @@ var MessagesView = {
       html += compiled;
       //append rendered message to the chats element
     }
+    MessagesView.$chats.empty();
     MessagesView.$chats.append(html);
+  },
+
+  handleRefresh: function() {
+    Messages.fetch();
   }
 
 };
