@@ -37,7 +37,7 @@ var MessagesView = {
 
   handleAddFriend: function() {
     console.log('clicked a username');
-    Friends.addFriend(this.innerText);
+    Friends.toggleStatus(this.innerText);
   }
 
 };

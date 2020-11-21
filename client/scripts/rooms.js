@@ -16,7 +16,7 @@ var Rooms = {
     });
   },
 
-  addRoom: function() {
+  add: function() {
     Rooms.list.push(RoomsView.$addRoom.val());
     RoomsView.$select.empty();
     for (room of Rooms.list) {
