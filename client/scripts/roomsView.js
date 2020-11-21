@@ -15,7 +15,14 @@ var RoomsView = {
     RoomsView.$select.empty();
     // iterate over the rooms array
     for (room of Rooms.list) {
-      var compiled = _.template(`<option value='<%- roomName %>'> <%-roomName%>  </option>`);
+      // if the room is lobby
+      if (room === 'lobby') {
+        // render as the default
+        var compiled = _.template(`<option value='<%- roomName %>' selected> <%-roomName%>  </option>`);
+      // otherwise
+      } else {
+        var compiled = _.template(`<option value='<%- roomName %>'> <%-roomName%>  </option>`);
+      }
       RoomsView.$select.append(compiled({'roomName': room}));
     }
   },

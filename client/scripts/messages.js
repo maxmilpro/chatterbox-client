@@ -4,7 +4,12 @@ var Messages = {
     Parse.readAll((data) => {
       // call MessageView.render on the data
       console.log('chatterbox: Messages retrieved');
-      MessagesView.render(data); // {results:}
+      MessagesView.$chats.empty();
+      // iterate over the data
+      for (message of data.results) {
+        // render the message to the DOM
+        MessagesView.renderMessage(message); // {results:}
+      }
     });
   },
   // create a set method that adds a message to our database
@@ -17,3 +22,5 @@ var Messages = {
   }
 
 };
+
+
