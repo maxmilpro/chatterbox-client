@@ -9,13 +9,19 @@ var Rooms = {
           Rooms.list.push(message.roomname);
         }
       }
-      RoomsView.render();
+      RoomsView.$select.empty();
+      for (room of Rooms.list) {
+        RoomsView.renderRoom(room);
+      }
     });
   },
 
   addRoom: function() {
     Rooms.list.push(RoomsView.$addRoom.val());
-    RoomsView.render();
+    RoomsView.$select.empty();
+    for (room of Rooms.list) {
+      RoomsView.renderRoom(room);
+    }
   },
 
   list: []

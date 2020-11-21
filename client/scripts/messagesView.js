@@ -13,8 +13,9 @@ var MessagesView = {
   renderMessage: function(message) {
     // if there is a username and text in the message
     if (message['username'] !== undefined && message['text'] !== undefined) {
-    // if the message's room is equal to the selected room
-      if (message.roomname === RoomsView.$select.val()/* || message.roomname === 'lobby'*/) {
+      var selectedRoom = RoomsView.$select.val() || 'lobby';
+      // if the message's room is equal to the selected room
+      if (message.roomname === selectedRoom) {
         //if the current message's username is in the friends list
         if (_.contains(Friends.list, message.username)) {
           // compile the message with bold text
